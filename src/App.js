@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Grid from './components/Grid/Grid';
+import GameOver from './components/GameOver/GameOver';
 import './App.css';
 
 const CARDS = [
@@ -128,8 +129,10 @@ matchFailed = () => {
   render() {
     return (
       <div className="App">
-        <Grid cards={this.state.cards} show={this.showCardHandler}/>
-        <button onClick={this.restartGameHandler}>RESTART GAME</button>
+      {this.state.cards.every(card => card.opened) ? <GameOver moves={this.state.moves}/> : (
+          <Grid cards={this.state.cards} show={this.showCardHandler}/>
+      )}
+    <button onClick={this.restartGameHandler}>RESTART GAME</button>
       </div>
     );
   }
