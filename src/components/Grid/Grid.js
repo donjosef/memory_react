@@ -5,7 +5,12 @@ import './Grid.css';
 const grid = props => {
 
     const cards = props.cards.map(card => (
-        <Card key={card.color + card.id} />
+        <Card
+          key={card.color + card.id}
+          show={props.show}
+          id={card.id}
+          color={card.color}
+          opened={card.opened}/>
     ));
     return(
         <ul className="Grid">
