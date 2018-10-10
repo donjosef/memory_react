@@ -25,6 +25,9 @@ class App extends Component {
 }
 
 showCardHandler = (selectedId) => {
+     if(this.state.cards.some(card => card.match === false )) {
+         return;
+     } //avoid to open a another card when there is a mismatch between two cards.  
      const cards = this.state.cards.map(card => {
          if(card.id === selectedId) {
              return {
