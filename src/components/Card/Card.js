@@ -2,10 +2,12 @@ import React from 'react';
 import './Card.css';
 
 const card = props => {
-
+    const {color, opened, show, id} = props;
     return (
         <li
-            className='Card'>
+          onClick={() => show(id)}
+          className='Card'
+          style={{background: opened ? color : '#f9f9f9'}}>
         </li>
     )
 }
