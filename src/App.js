@@ -56,7 +56,9 @@ fillchosenCards = (selectedId) => {
 checkMatch = () => {
       if(this.state.chosenCards[0].color === this.state.chosenCards[1].color) {
          this.matchSuccess();
-      }
+      } else {
+            this.matchFailed();
+      } //the 2 chosen cards are not equal
 }
 
 matchSuccess = () => {
@@ -75,6 +77,38 @@ matchSuccess = () => {
           chosenCards: []
       });
 }
+
+matchFailed = () => {
+        const cards = this.state.cards.map(card => {
+            if(card === this.state.chosenCards[0] || card === this.state.chosenCards[1]) { //check if the card is the same one inside chosenCards
+                return {
+                    ...card,
+                    match: false
+                };
+            } else {
+                return card;
+            }
+        });
+
+        this.setState({ cards }, () => {
+            setTimeout(() => {
+               this.setState({
+                   cards: this.state.cards.map(card => {
+                       if(card.match === false) {
+                           return {
+                               ...card,
+                               opened: false,
+                               match: undefined
+                           };
+                        } else {
+                            return card;
+                        }
+                   }),
+                   chosenCards: []
+               });
+            }, 5000); //after 5 seconds close the mismatched cards
+        });
+  }
 
   render() {
     return (
