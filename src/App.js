@@ -21,13 +21,14 @@ class App extends Component {
 
   state = {
     cards: CARDS,
-    chosenCards: []
+    chosenCards: [],
+    moves: 0
 }
 
 showCardHandler = (selectedId) => {
      if(this.state.cards.some(card => card.match === false )) {
          return;
-     } //avoid to open a another card when there is a mismatch between two cards.  
+     } //avoid to open a another card when there is a mismatch between two cards.
      const cards = this.state.cards.map(card => {
          if(card.id === selectedId) {
              return {
@@ -50,9 +51,12 @@ fillchosenCards = (selectedId) => {
           }), () => {
             //after having filled the chosenCards array
             if(this.state.chosenCards.length === 2) {
-                this.checkMatch();
-              }
-            });
+              this.setState(prevState => ({
+                  moves: prevState.moves + 1
+              }));
+              this.checkMatch();
+            }
+          });
       }
 }
 
@@ -112,6 +116,8 @@ matchFailed = () => {
             }, 5000); //after 5 seconds close the mismatched cards
         });
   }
+
+
 
   render() {
     return (
