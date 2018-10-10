@@ -20,7 +20,8 @@ const CARDS = [
 class App extends Component {
 
   state = {
-    cards: CARDS
+    cards: CARDS,
+    chosenCards: []
 }
 
 showCardHandler = (selectedId) => {
@@ -35,7 +36,44 @@ showCardHandler = (selectedId) => {
          }
      });
 
-      this.setState({ cards });
+      this.setState({ cards }, () => this.fillchosenCards(selectedId)); //after clicking the card, that card will have opened prop true. setState is async, so after it is completed, invoke fillchosenCards
+}
+
+fillchosenCards = (selectedId) => {
+      //Push the card inside chosenCards array only if its length is less than 2 and it doesnt includes the selectedId yet
+      if(this.state.chosenCards.length < 2 && !this.state.chosenCards.some(card => card.id === selectedId)) {
+          this.setState(prevState => ({
+              chosenCards: prevState.chosenCards.concat(this.state.cards.find(card => card.id === selectedId))
+          }), () => {
+            //after having filled the chosenCards array
+            if(this.state.chosenCards.length === 2) {
+                this.checkMatch();
+              }
+            });
+      }
+}
+
+checkMatch = () => {
+      if(this.state.chosenCards[0].color === this.state.chosenCards[1].color) {
+         this.matchSuccess();
+      }
+}
+
+matchSuccess = () => {
+      const cards = this.state.cards.map(card => {
+            if(card.color === this.state.chosenCards[0].color) {
+                return {
+                    ...card,
+                    match: true
+                }; //a brand new object with match true
+            } else {
+                return card;
+            }
+      });
+      this.setState({
+          cards,
+          chosenCards: []
+      });
 }
 
   render() {
