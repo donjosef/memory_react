@@ -3,5 +3,8 @@
     height: 125px;
     border: 1px solid grey;
     cursor: pointer;
-    background-color: #fff;
+}
+
+.Success {
+    box-shadow: 0 0 2px 2px #fff;
 }
