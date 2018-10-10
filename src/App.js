@@ -117,12 +117,19 @@ matchFailed = () => {
         });
   }
 
-
+  restartGameHandler = () => {
+     this.setState({
+         cards: CARDS,
+         chosenCards: [],
+         moves: 0
+     });
+  }
 
   render() {
     return (
       <div className="App">
         <Grid cards={this.state.cards} show={this.showCardHandler}/>
+        <button onClick={this.restartGameHandler}>RESTART GAME</button>
       </div>
     );
   }
