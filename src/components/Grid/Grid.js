@@ -10,7 +10,8 @@ const grid = props => {
           show={props.show}
           id={card.id}
           color={card.color}
-          opened={card.opened}/>
+          opened={card.opened}
+          match={card.match}/>
     ));
     return(
         <ul className="Grid">
