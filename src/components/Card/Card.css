@@ -8,3 +8,18 @@
 .Success {
     box-shadow: 0 0 2px 2px #fff;
 }
+
+.Fail {
+    box-shadow: 0 0 4px 2px #ff0000;
+    animation: shake 0.9s;
+}
+
+@keyframes shake {
+    0%, 40%, 80% {
+        transform: translateX(-2px);
+    }
+
+    20%, 60%, 100% {
+        transform: translateX(2px);
+    }
+}

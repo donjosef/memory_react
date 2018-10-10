@@ -7,6 +7,9 @@ const card = props => {
     if(match === true) {
         classes.push('Success');
     }
+    if(match === false) {
+        classes.push('Fail');
+    }
     return (
         <li
           onClick={() => show(id)}
