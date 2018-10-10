@@ -22,10 +22,26 @@ class App extends Component {
   state = {
     cards: CARDS
 }
+
+showCardHandler = (selectedId) => {
+     const cards = this.state.cards.map(card => {
+         if(card.id === selectedId) {
+             return {
+                 ...card,
+                 opened: true
+             };
+         } else {
+             return card
+         }
+     });
+
+      this.setState({ cards });
+}
+
   render() {
     return (
       <div className="App">
-        <Grid cards={this.state.cards}/>
+        <Grid cards={this.state.cards} show={this.showCardHandler}/>
       </div>
     );
   }
